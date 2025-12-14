@@ -82,7 +82,7 @@ services:
       dockerfile: Dockerfile
     image: scideology-store:prod
     volumes:
-      - store_data:/app
+      - store_data:/data
     environment:
       - ADMIN_API_KEY=${ADMIN_API_KEY}
       - SQUARE_ACCESS_TOKEN=${SQUARE_ACCESS_TOKEN}

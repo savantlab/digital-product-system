@@ -11,7 +11,8 @@ app = Flask(__name__)
 ADMIN_API_KEY = os.environ.get("ADMIN_API_KEY", "change-me-in-production")
 
 # Product metadata file
-PRODUCT_DATA_FILE = Path("product_data.json")
+PRODUCT_DATA_FILE = Path("/data/product_data.json")
+PRODUCT_DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 # Pricing (in cents)
 PRICE_INDIVIDUAL = int(os.environ.get("PRICE_INDIVIDUAL", "1499"))
