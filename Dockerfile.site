@@ -1,0 +1,34 @@
+# Multi-stage build to generate a static Jupyter Book site and serve via nginx
+
+# -------- Builder: build the Jupyter Book --------
+FROM python:3.11-slim AS builder
+
+ENV PIP_NO_CACHE_DIR=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY . /app
+
+# Minimal deps to build the book + libs used in examples
+RUN pip install --upgrade pip && \
+    pip install jupyter-book myst-parser jupytext \
+                numpy pandas matplotlib scikit-learn networkx
+
+# Build the site (outputs to book/_build/html)
+RUN jupyter-book build book/
+
+# -------- Runtime: serve static HTML via nginx --------
+FROM nginx:alpine AS runtime
+
+# Replace default site config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy built HTML from builder
+COPY --from=builder /app/book/_build/html /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

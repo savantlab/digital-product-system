@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile.site
+    image: 2083-site:latest
+    ports:
+      - "8000:80"
+
+  lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    image: 2083-lab:latest
+    command: [
+      "jupyter","lab",
+      "--ip=0.0.0.0","--port=8888","--no-browser",
+      "--ServerApp.token=",
+      "--ServerApp.allow_origin=*",
+      "--ServerApp.disable_check_xsrf=True"
+    ]
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/workspace
+
+  voila:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    image: 2083-voila:latest
+    command: [
+      "voila","analysis_presentation.ipynb",
+      "--no-browser","--port=8866",
+      "--Voila.ip=0.0.0.0",
+      "--Voila.base_url=/"
+    ]
+    ports:
+      - "8866:8866"
+    volumes:
+      - ./:/workspace

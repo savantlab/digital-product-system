@@ -1,0 +1,18 @@
+# VCS and OS
+.git
+.gitignore
+.DS_Store
+
+# Python
+__pycache__
+*.py[cod]
+*.egg-info/
+.venv
+venv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Builds
+book/_build/
+node_modules/

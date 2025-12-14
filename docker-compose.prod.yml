@@ -1,0 +1,172 @@
+version: "3.9"
+
+x-common-labels: &common_labels
+  traefik.enable: "true"
+
+networks:
+  web:
+    external: false
+
+volumes:
+  traefik-letsencrypt: {}
+
+services:
+  reverse-proxy:
+    image: traefik:v3.1
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --accesslog=true
+      - --log.level=INFO
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+    networks:
+      - web
+
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile.site
+    image: 2083-site:prod
+    networks:
+      - web
+    labels:
+      <<: *common_labels
+      traefik.http.middlewares.book-auth.forwardauth.address: https://${EVENTS_DOMAIN}/api/authz
+      traefik.http.middlewares.book-auth.forwardauth.trustForwardHeader: "true"
+      traefik.http.routers.book.rule: Host(`${BOOK_DOMAIN}`)
+      traefik.http.routers.book.entrypoints: websecure
+      traefik.http.routers.book.tls: "true"
+      traefik.http.routers.book.tls.certresolver: letsencrypt
+      traefik.http.routers.book.middlewares: book-auth
+      traefik.http.services.book.loadbalancer.server.port: 80
+      traefik.http.routers.book-redirect.rule: Host(`${BOOK_DOMAIN}`)
+      traefik.http.routers.book-redirect.entrypoints: web
+      traefik.http.routers.book-redirect.middlewares: redirect-to-https
+
+  lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    image: 2083-lab:prod
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+    command: [
+      "jupyter","lab",
+      "--ip=0.0.0.0","--port=8888","--no-browser",
+      "--ServerApp.token=${JUPYTER_TOKEN}",
+      "--ServerApp.allow_origin=*"
+    ]
+    networks:
+      - web
+    labels:
+      <<: *common_labels
+      traefik.http.routers.lab.rule: Host(`${LAB_DOMAIN}`)
+      traefik.http.routers.lab.entrypoints: websecure
+      traefik.http.routers.lab.tls: "true"
+      traefik.http.routers.lab.tls.certresolver: letsencrypt
+      traefik.http.services.lab.loadbalancer.server.port: 8888
+      traefik.http.routers.lab-redirect.rule: Host(`${LAB_DOMAIN}`)
+      traefik.http.routers.lab-redirect.entrypoints: web
+      traefik.http.routers.lab-redirect.middlewares: redirect-to-https
+      # Optional basic auth (set BASIC_AUTH_USERS to "user:hashedpass")
+      traefik.http.middlewares.lab-auth.forwardauth.address: https://${EVENTS_DOMAIN}/api/authz
+      traefik.http.middlewares.lab-auth.forwardauth.trustForwardHeader: "true"
+      traefik.http.routers.lab.middlewares: lab-auth,compress
+      traefik.http.middlewares.lab-auth.basicauth.users: ${BASIC_AUTH_USERS}
+      traefik.http.middlewares.compress.compress: "true"
+
+  voila:
+    build:
+      context: .
+      dockerfile: Dockerfile.lab
+    image: 2083-voila:prod
+    command: [
+      "voila","analysis_presentation.ipynb",
+      "--no-browser","--port=8866",
+      "--Voila.ip=0.0.0.0",
+      "--Voila.base_url=/"
+    ]
+    networks:
+      - web
+    labels:
+      <<: *common_labels
+      traefik.http.routers.app.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.app.entrypoints: websecure
+      traefik.http.routers.app.tls: "true"
+      traefik.http.routers.app.tls.certresolver: letsencrypt
+      traefik.http.services.app.loadbalancer.server.port: 8866
+      traefik.http.routers.app-redirect.rule: Host(`${APP_DOMAIN}`)
+      traefik.http.routers.app-redirect.entrypoints: web
+      traefik.http.routers.app-redirect.middlewares: redirect-to-https
+      traefik.http.middlewares.app-auth.forwardauth.address: https://${EVENTS_DOMAIN}/api/authz
+      traefik.http.middlewares.app-auth.forwardauth.trustForwardHeader: "true"
+      traefik.http.routers.app.middlewares: app-auth
+
+  # Global middleware to redirect HTTP->HTTPS
+  redirector:
+    image: traefik:v3.1
+    networks:
+      - web
+    labels:
+      traefik.enable: "true"
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
+      traefik.http.middlewares.redirect-to-https.redirectscheme.permanent: "true"
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - web
+
+  events-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: 2083-events-api:prod
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - MAILGUN_SIGNING_KEY=${MAILGUN_SIGNING_KEY}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+      - ALLOWED_ORIGINS=https://${BOOK_DOMAIN},https://${LAB_DOMAIN},https://${APP_DOMAIN}
+    networks:
+      - web
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.events.rule: Host(`${EVENTS_DOMAIN}`)
+      traefik.http.routers.events.entrypoints: websecure
+      traefik.http.routers.events.tls: "true"
+      traefik.http.routers.events.tls.certresolver: letsencrypt
+      traefik.http.services.events.loadbalancer.server.port: 8001
+
+  events-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: 2083-events-worker:prod
+    command: ["python","worker.py"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+    networks:
+      - web
+    depends_on:
+      - redis

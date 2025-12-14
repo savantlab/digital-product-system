@@ -1,0 +1,85 @@
+version: "3.9"
+
+networks:
+  web: {}
+
+volumes:
+  traefik-letsencrypt: {}
+
+services:
+  reverse-proxy:
+    image: traefik:v3.1
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --accesslog=true
+      - --log.level=INFO
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+    networks:
+      - web
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - web
+
+  events-api:
+    image: ghcr.io/${GHCR_OWNER}/events-api:latest
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - MAILGUN_SIGNING_KEY=${MAILGUN_SIGNING_KEY}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+      - EVENTS_DOMAIN=${EVENTS_DOMAIN}
+      - AUTH_BASE_URL=${AUTH_BASE_URL}
+      - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+      - JWT_SECRET=${JWT_SECRET}
+      - OTP_TTL_MIN=${OTP_TTL_MIN}
+      - OTP_ATTEMPT_MAX=${OTP_ATTEMPT_MAX}
+    networks:
+      - web
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.events.rule: Host(`${EVENTS_DOMAIN}`)
+      traefik.http.routers.events.entrypoints: websecure
+      traefik.http.routers.events.tls: "true"
+      traefik.http.routers.events.tls.certresolver: letsencrypt
+      traefik.http.services.events.loadbalancer.server.port: 8001
+
+  events-worker:
+    image: ghcr.io/${GHCR_OWNER}/events-api:latest
+    command: ["python","worker.py"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+    networks:
+      - web
+    depends_on:
+      - redis
+
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    command: ["--interval","300","--cleanup","--include-restarting"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - web

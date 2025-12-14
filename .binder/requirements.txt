@@ -1,0 +1,11 @@
+jupyterlab>=4.0
+jupyter-book>=1.0.0
+myst-parser
+jupytext
+numpy
+pandas
+matplotlib
+scikit-learn
+networkx
+ipywidgets
+voila

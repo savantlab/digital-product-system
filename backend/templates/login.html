@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sign in</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+    .box { max-width: 420px; margin: 0 auto; padding: 1.5rem; border: 1px solid #ddd; border-radius: 8px; }
+    input, button { width: 100%; padding: .75rem; margin-top: .5rem; font-size: 1rem; }
+    .hint { color: #555; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Sign in</h2>
+    <p class="hint">Enter your email. We'll send a verification code.</p>
+    <form id="form">
+      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      <input type="hidden" id="target" name="target" value="{{ target }}" />
+      <button type="submit">Email me a code</button>
+    </form>
+    <p id="msg" class="hint" style="display:none;">Check your email for a code, then continue.</p>
+  </div>
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const target = document.getElementById('target').value;
+      await fetch('/api/auth/start', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, host: new URL(target).host})});
+      document.getElementById('msg').style.display = 'block';
+      // Redirect to OTP entry page with email + target
+      const qp = new URLSearchParams({email, target});
+      window.location.href = `/auth/otp?${qp.toString()}`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Enter code</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; }
+    .box { max-width: 420px; margin: 0 auto; padding: 1.5rem; border: 1px solid #ddd; border-radius: 8px; }
+    input, button { width: 100%; padding: .75rem; margin-top: .5rem; font-size: 1rem; }
+    .hint { color: #555; font-size: .9rem; }
+    .err { color: #b00020; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter your code</h2>
+    <p class="hint">We sent a 6‑digit code to {{ email }}. Check your inbox.</p>
+    <form id="form">
+      <input type="text" id="code" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" minlength="6" placeholder="123456" required />
+      <input type="hidden" id="email" name="email" value="{{ email }}" />
+      <input type="hidden" id="target" name="target" value="{{ target }}" />
+      <button type="submit">Verify and continue</button>
+    </form>
+    <p id="err" class="err" style="display:none;"></p>
+    <p class="hint"><a id="resend" href="#">Resend code</a></p>
+  </div>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    $('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = { email: $('email').value, host: new URL($('target').value).host, code: $('code').value.trim() };
+      const res = await fetch('/api/auth/verify', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), credentials:'include'});
+      const data = await res.json().catch(()=>({}));
+      if (!res.ok || !data.ok) {
+        $('err').textContent = data.error || 'Invalid code';
+        $('err').style.display = 'block';
+        return;
+      }
+      // Redirect to target
+      window.location.href = $('target').value;
+    });
+    $('resend').addEventListener('click', async (e) => {
+      e.preventDefault();
+      await fetch('/api/auth/start', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: $('email').value, host: new URL($('target').value).host})});
+      alert('Code resent. Check your email.');
+    });
+  </script>
+</body>
+</html>

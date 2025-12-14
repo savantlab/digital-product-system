@@ -1,0 +1,28 @@
+# Interactive environment for running notebooks (JupyterLab/Voila)
+FROM python:3.11-slim
+
+ENV PIP_NO_CACHE_DIR=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
+    NB_USER=app NB_UID=1000 NB_GID=1000
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    tini \
+  && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user
+RUN groupadd -g ${NB_GID} ${NB_USER} && \
+    useradd -m -u ${NB_UID} -g ${NB_GID} -s /bin/bash ${NB_USER}
+
+WORKDIR /workspace
+COPY . /workspace
+
+# Jupyter + deps used in analysis
+RUN pip install --upgrade pip && \
+    pip install jupyterlab voila ipywidgets \
+                numpy pandas matplotlib scikit-learn networkx
+
+EXPOSE 8888 8866
+
+USER ${NB_USER}
+ENTRYPOINT ["/usr/bin/tini","--"]
+# Default command runs JupyterLab; override in docker-compose to run Voila
+CMD ["jupyter","lab","--ip=0.0.0.0","--port=8888","--no-browser","--ServerApp.token="]
