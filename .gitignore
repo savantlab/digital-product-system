@@ -41,3 +41,4 @@ book/images/**
 book/data/**
 
 .square-production-creds
+DEPLOYMENT_NOTES.md
