@@ -5,6 +5,7 @@ networks:
 volumes:
   caddy_data: {}
   caddy_config: {}
+  store_data: {}
 
 services:
   caddy:
@@ -80,5 +81,9 @@ services:
       context: ./store
       dockerfile: Dockerfile
     image: scideology-store:prod
+    volumes:
+      - store_data:/app
+    environment:
+      - ADMIN_API_KEY=${ADMIN_API_KEY}
     networks:
       - web

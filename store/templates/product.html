@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Buy — Parallel Critiques</title>
+  <title>{{ product.title }}</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#0b0b0b}
     header{padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
@@ -19,18 +19,22 @@
 </head>
 <body>
 <header>
-  <strong>Parallel Critiques</strong>
+  <strong>{{ product.title }}</strong>
   <nav><a href="https://login.scideology.app/auth/login?target=https://scideology.app">Login</a></nav>
 </header>
 <main>
-  <h1>Purchase Access</h1>
+  {% if product.hero_image %}
+  <img src="{{ product.hero_image }}" alt="Product hero" style="width:100%;max-width:800px;border-radius:10px;margin-bottom:1rem"/>
+  {% endif %}
+  <h1>{{ product.title }}</h1>
+  <p style="font-size:1.1rem;color:#333;margin-bottom:2rem">{{ product.description }}</p>
   <form method="post" action="/checkout">
     <div class="grid">
       {% for key,t in tiers.items() %}
       <div class="card">
-        <label><input type="radio" name="tier" value="{{ key }}" {% if loop.first %}checked{% endif %}> {{ t.name }}</label>
+        <label><input type="radio" name="tier" value="{{ key }}" {% if loop.first %}checked{% endif %}> <strong>{{ t.name }}</strong></label>
         <div class="price">${{ "%.2f"|format(t.price/100) }}</div>
-        <p class="muted">Single product license tier.</p>
+        <p class="muted">{{ t.description }}</p>
       </div>
       {% endfor %}
     </div>
