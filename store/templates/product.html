@@ -6,15 +6,23 @@
   <title>{{ product.title }}</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#0b0b0b}
-    header{padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
-    main{max-width:960px;margin:2rem auto;padding:0 1rem}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-    .card{border:1px solid #eee;border-radius:10px;padding:1rem}
-    .price{font-size:1.5rem;font-weight:700}
-    .cta{background:#111;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;cursor:pointer;width:100%}
+    header{padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+    main{max-width:1200px;margin:2rem auto;padding:0 1.5rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    @media(max-width:768px){.two-col{grid-template-columns:1fr}}
+    .hero-img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+    .content h1{margin:0 0 1rem;font-size:2rem}
+    .content p{font-size:1.1rem;color:#333;line-height:1.6;margin-bottom:2rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .card{border:1px solid #ddd;border-radius:8px;padding:1rem;transition:border-color .2s}
+    .card:has(input:checked){border-color:#111;background:#f9f9f9}
+    .price{font-size:1.5rem;font-weight:700;margin:.5rem 0}
+    .cta{background:#111;color:#fff;border:none;border-radius:8px;padding:.85rem 1.5rem;cursor:pointer;width:100%;font-size:1.05rem;font-weight:600}
+    .cta:hover{background:#000}
     input,button{font-size:1rem}
-    label{display:block;margin:.5rem 0}
+    label{display:block;margin:.5rem 0;cursor:pointer}
     .muted{color:#666;font-size:.9rem}
+    input[type=email]{width:100%;padding:.7rem;border-radius:6px;border:1px solid #ccc;margin-top:.5rem}
   </style>
 </head>
 <body>
@@ -23,12 +31,16 @@
   <nav><a href="https://login.scideology.app/auth/login?target=https://scideology.app">Login</a></nav>
 </header>
 <main>
-  {% if product.hero_image %}
-  <img src="{{ product.hero_image }}" alt="Product hero" style="width:100%;max-width:800px;border-radius:10px;margin-bottom:1rem"/>
-  {% endif %}
-  <h1>{{ product.title }}</h1>
-  <p style="font-size:1.1rem;color:#333;margin-bottom:2rem">{{ product.description }}</p>
-  <form method="post" action="/checkout">
+  <div class="two-col">
+    <div>
+      {% if product.hero_image %}
+      <img src="{{ product.hero_image }}" alt="{{ product.title }}" class="hero-img"/>
+      {% endif %}
+    </div>
+    <div class="content">
+      <h1>{{ product.title }}</h1>
+      <p>{{ product.description }}</p>
+      <form method="post" action="/checkout">
     <div class="grid">
       {% for key,t in tiers.items() %}
       <div class="card">
@@ -38,12 +50,14 @@
       </div>
       {% endfor %}
     </div>
-    <label>Email (for receipt):
-      <input type="email" name="email" placeholder="you@example.com" style="width:100%;padding:.6rem;border-radius:6px;border:1px solid #ccc" />
-    </label>
-    <p class="muted">Secure checkout is powered by Square. You will be redirected.</p>
-    <button class="cta" type="submit">Checkout</button>
-  </form>
+        <label>Email (for receipt):
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <p class="muted">Secure checkout powered by Square. You will be redirected to complete payment.</p>
+        <button class="cta" type="submit">Proceed to Checkout</button>
+      </form>
+    </div>
+  </div>
 </main>
 </body>
 </html>
