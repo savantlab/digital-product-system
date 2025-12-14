@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Buy — Parallel Critiques</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#0b0b0b}
+    header{padding:1rem 1.5rem;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
+    main{max-width:960px;margin:2rem auto;padding:0 1rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .card{border:1px solid #eee;border-radius:10px;padding:1rem}
+    .price{font-size:1.5rem;font-weight:700}
+    .cta{background:#111;color:#fff;border:none;border-radius:8px;padding:.75rem 1rem;cursor:pointer;width:100%}
+    input,button{font-size:1rem}
+    label{display:block;margin:.5rem 0}
+    .muted{color:#666;font-size:.9rem}
+  </style>
+</head>
+<body>
+<header>
+  <strong>Parallel Critiques</strong>
+  <nav><a href="https://login.scideology.app/auth/login?target=https://scideology.app">Login</a></nav>
+</header>
+<main>
+  <h1>Purchase Access</h1>
+  <form method="post" action="/checkout">
+    <div class="grid">
+      {% for key,t in tiers.items() %}
+      <div class="card">
+        <label><input type="radio" name="tier" value="{{ key }}" {% if loop.first %}checked{% endif %}> {{ t.name }}</label>
+        <div class="price">${{ %.2f % (t.price/100) }}</div>
+        <p class="muted">Single product license tier.</p>
+      </div>
+      {% endfor %}
+    </div>
+    <label>Email (for receipt):
+      <input type="email" name="email" placeholder="you@example.com" style="width:100%;padding:.6rem;border-radius:6px;border:1px solid #ccc" />
+    </label>
+    <p class="muted">Secure checkout is powered by Square. You will be redirected.</p>
+    <button class="cta" type="submit">Checkout</button>
+  </form>
+</main>
+</body>
+</html>
