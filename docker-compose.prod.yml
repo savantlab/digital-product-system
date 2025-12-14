@@ -13,6 +13,8 @@ volumes:
 services:
   reverse-proxy:
     image: traefik:v3.2
+    environment:
+      - DOCKER_API_VERSION=1.44
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
