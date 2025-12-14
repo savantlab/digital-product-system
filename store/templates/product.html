@@ -29,7 +29,7 @@
       {% for key,t in tiers.items() %}
       <div class="card">
         <label><input type="radio" name="tier" value="{{ key }}" {% if loop.first %}checked{% endif %}> {{ t.name }}</label>
-        <div class="price">${{ %.2f % (t.price/100) }}</div>
+        <div class="price">${{ "%.2f"|format(t.price/100) }}</div>
         <p class="muted">Single product license tier.</p>
       </div>
       {% endfor %}
