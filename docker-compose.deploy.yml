@@ -93,7 +93,7 @@ services:
       - web
     labels:
       traefik.enable: "true"
-      traefik.http.routers.www.rule: Host()
+      traefik.http.routers.www.rule: Host("scideology.app")
       traefik.http.routers.www.entrypoints: websecure
       traefik.http.routers.www.tls: "true"
       traefik.http.routers.www.tls.certresolver: letsencrypt
