@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SciDeology</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; color: #0b0b0b; }
+    header { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; display:flex; align-items:center; justify-content:space-between; }
+    main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    .cta { display:inline-block; background:#111; color:#fff; padding:.75rem 1rem; border-radius:8px; text-decoration:none; }
+    .row { display:flex; gap:2rem; flex-wrap:wrap; }
+    .card { flex:1 1 280px; border:1px solid #eee; border-radius:10px; padding:1rem; }
+    footer { margin: 3rem 0; text-align:center; color:#666; font-size:.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>SciDeology</strong></div>
+    <nav>
+      <a class="cta" href="https://login.scideology.app/auth/login?target=https://scideology.app">Login</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Parallel Critiques</h1>
+    <p>Interactive analysis and ebook experience. Purchase access and explore the live notebooks.</p>
+    <div class="row">
+      <div class="card">
+        <h3>Read the Book</h3>
+        <p>Data-driven chapters with live figures.</p>
+        <a class="cta" href="#">Buy Access</a>
+      </div>
+      <div class="card">
+        <h3>Run Notebooks</h3>
+        <p>Execute the analysis in the browser.</p>
+        <a class="cta" href="#">Try Demo</a>
+      </div>
+      <div class="card">
+        <h3>Secure Login</h3>
+        <p>Email-based 2FA at login.scideology.app.</p>
+        <a class="cta" href="https://login.scideology.app/auth/login?target=https://scideology.app">Login</a>
+      </div>
+    </div>
+    <footer>
+      © <span id="y"></span> SciDeology
+    </footer>
+  </main>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>

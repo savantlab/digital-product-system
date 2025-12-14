@@ -170,3 +170,18 @@ services:
       - web
     depends_on:
       - redis
+
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile.www
+    image: scideology-www:prod
+    networks:
+      - web
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.www.rule: Host()
+      traefik.http.routers.www.entrypoints: websecure
+      traefik.http.routers.www.tls: "true"
+      traefik.http.routers.www.tls.certresolver: letsencrypt
+      traefik.http.services.www.loadbalancer.server.port: 80
