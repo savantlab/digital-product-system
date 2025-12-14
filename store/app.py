@@ -16,8 +16,11 @@ PRODUCT_DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 # Pricing (in cents)
 PRICE_INDIVIDUAL = int(os.environ.get("PRICE_INDIVIDUAL", "1499"))
-PRICE_ACADEMIC   = int(os.environ.get("PRICE_ACADEMIC",   "9999"))
-PRICE_CORPORATE  = int(os.environ.get("PRICE_CORPORATE",  "49999"))
+PRICE_ACADEMIC   = int(os.environ.get("PRICE_ACADEMIC",   "49999"))
+PRICE_CORPORATE  = int(os.environ.get("PRICE_CORPORATE",  "99999"))
+PRICE_GOVERNMENT = int(os.environ.get("PRICE_GOVERNMENT", "49999"))
+PRICE_NONPROFIT_PER_USER = int(os.environ.get("PRICE_NONPROFIT_PER_USER", "999"))
+NONPROFIT_MIN_USERS = int(os.environ.get("NONPROFIT_MIN_USERS", "10"))
 CURRENCY = os.environ.get("CURRENCY", "USD")
 
 # Square
@@ -38,9 +41,11 @@ def load_product_data():
         "hero_image": None,
         "gallery_images": [],
         "tiers": {
-            "individual": {"name": "Individual", "price": PRICE_INDIVIDUAL, "description": "Single user license"},
-            "academic": {"name": "Academic/Educational", "price": PRICE_ACADEMIC, "description": "For educational institutions"},
-            "corporate": {"name": "Corporate/Agency", "price": PRICE_CORPORATE, "description": "For commercial use"},
+            "individual": {"name": "Individual", "price": PRICE_INDIVIDUAL, "description": "Personal use (1 user)."},
+            "academic": {"name": "Academic/Educational", "price": PRICE_ACADEMIC, "description": "One course or cohort. Unlimited students. Upload roster after purchase."},
+            "corporate": {"name": "Corporate/Agency", "price": PRICE_CORPORATE, "description": "Unlimited team members."},
+            "government": {"name": "Government", "price": PRICE_GOVERNMENT, "description": "Unlimited users per agency."},
+            "nonprofit": {"name": "Non-Profit", "price": PRICE_NONPROFIT_PER_USER * NONPROFIT_MIN_USERS, "description": f"${PRICE_NONPROFIT_PER_USER/100:.2f} per user. Minimum {NONPROFIT_MIN_USERS} users."},
         }
     }
 
