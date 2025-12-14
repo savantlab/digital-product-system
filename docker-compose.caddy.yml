@@ -1,0 +1,84 @@
+networks:
+  web:
+    external: false
+
+volumes:
+  caddy_data: {}
+  caddy_config: {}
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - BASE_DOMAIN=${BASE_DOMAIN}
+      - EVENTS_DOMAIN=${EVENTS_DOMAIN}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+    networks:
+      - web
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - web
+
+  events-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: scideology-events-api:prod
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - MAILGUN_SIGNING_KEY=${MAILGUN_SIGNING_KEY}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+    networks:
+      - web
+
+  events-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: scideology-events-worker:prod
+    command: ["python", "worker.py"]
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_FROM=${MAILGUN_FROM}
+      - BOOK_DOMAIN=${BOOK_DOMAIN}
+      - LAB_DOMAIN=${LAB_DOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
+    networks:
+      - web
+    depends_on:
+      - redis
+
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile.www
+    image: scideology-www:prod
+    networks:
+      - web
+
+  store:
+    build:
+      context: ./store
+      dockerfile: Dockerfile
+    image: scideology-store:prod
+    networks:
+      - web

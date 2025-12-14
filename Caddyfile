@@ -1,0 +1,29 @@
+{$BASE_DOMAIN} {
+    reverse_proxy store:8080
+}
+
+www.{$BASE_DOMAIN} {
+    reverse_proxy www:80
+}
+
+{$EVENTS_DOMAIN} {
+    reverse_proxy events-api:8001
+}
+
+{$BOOK_DOMAIN} {
+    reverse_proxy @authenticated book:80
+    
+    @authenticated {
+        header_regexp Authorization "Bearer .+"
+    }
+    
+    respond @authenticated 403
+}
+
+{$LAB_DOMAIN} {
+    reverse_proxy lab:8888
+}
+
+{$APP_DOMAIN} {
+    reverse_proxy voila:8866
+}
