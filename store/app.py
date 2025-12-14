@@ -40,6 +40,9 @@ def load_product_data():
         "description": "Purchase access to the complete text analysis book and interactive notebooks.",
         "hero_image": None,
         "gallery_images": [],
+        "details_html": None,
+        "faq_html": None,
+        "cookies_notice_html": None,
         "tiers": {
             "individual": {"name": "Individual", "price": PRICE_INDIVIDUAL, "description": "Personal use (1 user)."},
             "academic": {"name": "Academic/Educational", "price": PRICE_ACADEMIC, "description": "One course or cohort. Unlimited students. Upload roster after purchase."},
@@ -139,6 +142,12 @@ def update_product():
         PRODUCT_DATA["hero_image"] = data["hero_image"]
     if "gallery_images" in data:
         PRODUCT_DATA["gallery_images"] = data["gallery_images"]
+    if "details_html" in data:
+        PRODUCT_DATA["details_html"] = data["details_html"]
+    if "faq_html" in data:
+        PRODUCT_DATA["faq_html"] = data["faq_html"]
+    if "cookies_notice_html" in data:
+        PRODUCT_DATA["cookies_notice_html"] = data["cookies_notice_html"]
     
     save_product_data(PRODUCT_DATA)
     return jsonify({"status": "updated", "product": PRODUCT_DATA})
@@ -190,6 +199,42 @@ def update_gallery():
     PRODUCT_DATA["gallery_images"] = data.get("images", [])
     save_product_data(PRODUCT_DATA)
     return jsonify({"status": "updated", "gallery_images": PRODUCT_DATA["gallery_images"]})
+
+@app.post("/api/admin/product/details")
+def update_details():
+    err = require_admin()
+    if err:
+        return err
+    
+    global PRODUCT_DATA
+    data = request.get_json() or {}
+    PRODUCT_DATA["details_html"] = data.get("html")
+    save_product_data(PRODUCT_DATA)
+    return jsonify({"status": "updated", "details_html": PRODUCT_DATA["details_html"]})
+
+@app.post("/api/admin/product/faq")
+def update_faq():
+    err = require_admin()
+    if err:
+        return err
+    
+    global PRODUCT_DATA
+    data = request.get_json() or {}
+    PRODUCT_DATA["faq_html"] = data.get("html")
+    save_product_data(PRODUCT_DATA)
+    return jsonify({"status": "updated", "faq_html": PRODUCT_DATA["faq_html"]})
+
+@app.post("/api/admin/product/cookies_notice")
+def update_cookies_notice():
+    err = require_admin()
+    if err:
+        return err
+    
+    global PRODUCT_DATA
+    data = request.get_json() or {}
+    PRODUCT_DATA["cookies_notice_html"] = data.get("html")
+    save_product_data(PRODUCT_DATA)
+    return jsonify({"status": "updated", "cookies_notice_html": PRODUCT_DATA["cookies_notice_html"]})
 
 @app.post("/api/admin/tiers/<tier_key>")
 def update_tier(tier_key):

@@ -58,6 +58,39 @@
       </form>
     </div>
   </div>
+
+  {% if product.details_html %}
+  <section style="max-width:1200px;margin:3rem auto;padding:0 1.5rem">
+    <h2 style="font-size:1.75rem;margin-bottom:1rem">Details</h2>
+    <div class="details-content">
+      {{ product.details_html|safe }}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if product.faq_html %}
+  <section style="max-width:1200px;margin:3rem auto;padding:0 1.5rem">
+    <h2 style="font-size:1.75rem;margin-bottom:1rem">FAQ</h2>
+    <div class="faq-content">
+      {{ product.faq_html|safe }}
+    </div>
+  </section>
+  {% endif %}
 </main>
+
+{% if product.cookies_notice_html %}
+<div id="cookies-notice" style="position:fixed;bottom:0;left:0;right:0;background:#333;color:#fff;padding:1rem 1.5rem;display:none;align-items:center;justify-content:space-between;z-index:1000">
+  <div style="flex:1">
+    {{ product.cookies_notice_html|safe }}
+  </div>
+  <button onclick="document.getElementById('cookies-notice').style.display='none';localStorage.setItem('cookies-accepted','true')" style="background:#fff;color:#333;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;margin-left:1rem;font-weight:600">Accept</button>
+</div>
+<script>
+  if (!localStorage.getItem('cookies-accepted')) {
+    document.getElementById('cookies-notice').style.display='flex';
+  }
+</script>
+{% endif %}
+
 </body>
 </html>
