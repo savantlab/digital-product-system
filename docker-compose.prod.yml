@@ -188,8 +188,8 @@ services:
 
   store:
     build:
-      context: .
-      dockerfile: store/Dockerfile
+      context: ./store
+      dockerfile: Dockerfile
     image: scideology-store:prod
     networks:
       - web
