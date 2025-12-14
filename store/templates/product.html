@@ -83,7 +83,10 @@
   <div style="flex:1">
     {{ product.cookies_notice_html|safe }}
   </div>
-  <button onclick="document.getElementById('cookies-notice').style.display='none';localStorage.setItem('cookies-accepted','true')" style="background:#fff;color:#333;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;margin-left:1rem;font-weight:600">Accept</button>
+  <div style="display:flex;gap:.5rem;margin-left:1rem">
+    <button onclick="document.getElementById('cookies-notice').style.display='none';localStorage.setItem('cookies-accepted','false')" style="background:transparent;color:#fff;border:1px solid #fff;padding:.5rem 1rem;border-radius:4px;cursor:pointer;font-weight:600">Reject</button>
+    <button onclick="document.getElementById('cookies-notice').style.display='none';localStorage.setItem('cookies-accepted','true')" style="background:#fff;color:#333;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;font-weight:600">Accept</button>
+  </div>
 </div>
 <script>
   if (!localStorage.getItem('cookies-accepted')) {
