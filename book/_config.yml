@@ -1,8 +1,6 @@
 # Jupyter Book configuration
 # See https://jupyterbook.org/customize/config.html
 
-root: .
-
 title: Parallel Critiques — Analyzing Rhetorical Extremism
 author: Savantlab
 language: en
