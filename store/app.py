@@ -2,10 +2,10 @@ import os
 import uuid
 import json
 from pathlib import Path
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # Admin API key
 ADMIN_API_KEY = os.environ.get("ADMIN_API_KEY", "change-me-in-production")
