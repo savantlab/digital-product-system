@@ -12,7 +12,7 @@ volumes:
 
 services:
   reverse-proxy:
-    image: traefik:v3.1
+    image: traefik:v3.2
     command:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
@@ -114,7 +114,7 @@ services:
 
   # Global middleware to redirect HTTP->HTTPS
   redirector:
-    image: traefik:v3.1
+    image: traefik:v3.2
     networks:
       - web
     labels:
