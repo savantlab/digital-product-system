@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  # Option A: Single-product store (Flask) reachable by IP
+  store:
+    build:
+      context: .
+      dockerfile: store/Dockerfile
+    image: scideology-store:ip
+    environment:
+      # Use http + IP for dev so redirects land back on the droplet
+      - STORE_BASE_URL=http://127.0.0.1
+      # Leave Square unset to simulate checkout locally
+      # - SQUARE_ACCESS_TOKEN=...
+      # - SQUARE_LOCATION_ID=...
+    ports:
+      - "80:8080"
+    restart: unless-stopped
+
+  # Option B: Static landing page reachable by IP (uncomment if preferred)
+  # www:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.www
+  #   image: scideology-www:ip
+  #   ports:
+  #     - "80:80"
+  #   restart: unless-stopped
