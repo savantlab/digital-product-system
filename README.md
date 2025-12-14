@@ -19,9 +19,9 @@ Complete e-commerce platform for selling digital products (Jupyter Book + intera
 
 ### Current Status
 
-✅ **Live in Production**
+✅ **Live in Staging/Development**
 - Domain: https://scideology.app
-- Store with Square sandbox checkout
+- Store with Square **sandbox** checkout (test mode only)
 - Admin API for product management
 - Public landing page
 - Auth API with OTP login
