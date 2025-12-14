@@ -6,6 +6,7 @@ volumes:
   caddy_data: {}
   caddy_config: {}
   store_data: {}
+  postgres_data: {}
 
 services:
   caddy:
@@ -32,6 +33,19 @@ services:
     networks:
       - web
 
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    networks:
+      - web
+    restart: unless-stopped
+
   events-api:
     build:
       context: ./backend
@@ -39,6 +53,7 @@ services:
     image: scideology-events-api:prod
     environment:
       - REDIS_URL=redis://redis:6379/0
+      - DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
       - MAILGUN_API_KEY=${MAILGUN_API_KEY}
       - MAILGUN_FROM=${MAILGUN_FROM}
@@ -46,8 +61,12 @@ services:
       - BOOK_DOMAIN=${BOOK_DOMAIN}
       - LAB_DOMAIN=${LAB_DOMAIN}
       - APP_DOMAIN=${APP_DOMAIN}
+      - SECRET_KEY=${SECRET_KEY}
     networks:
       - web
+    depends_on:
+      - postgres
+      - redis
 
   events-worker:
     build:
@@ -57,15 +76,18 @@ services:
     command: ["python", "worker.py"]
     environment:
       - REDIS_URL=redis://redis:6379/0
+      - DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
       - MAILGUN_API_KEY=${MAILGUN_API_KEY}
       - MAILGUN_FROM=${MAILGUN_FROM}
       - BOOK_DOMAIN=${BOOK_DOMAIN}
       - LAB_DOMAIN=${LAB_DOMAIN}
       - APP_DOMAIN=${APP_DOMAIN}
+      - SECRET_KEY=${SECRET_KEY}
     networks:
       - web
     depends_on:
+      - postgres
       - redis
 
   www:
@@ -85,13 +107,21 @@ services:
       - store_data:/data
     environment:
       - ADMIN_API_KEY=${ADMIN_API_KEY}
+      - REDIS_URL=redis://redis:6379/0
       - SQUARE_ACCESS_TOKEN=${SQUARE_ACCESS_TOKEN}
       - SQUARE_LOCATION_ID=${SQUARE_LOCATION_ID}
       - SQUARE_BASE=${SQUARE_BASE}
+      - SQUARE_WEBHOOK_SECRET=${SQUARE_WEBHOOK_SECRET}
       - STORE_BASE_URL=https://${BASE_DOMAIN}
+      - EVENTS_API_URL=http://events-api:8001
       - PRICE_INDIVIDUAL=${PRICE_INDIVIDUAL}
       - PRICE_ACADEMIC=${PRICE_ACADEMIC}
       - PRICE_CORPORATE=${PRICE_CORPORATE}
+      - PRICE_GOVERNMENT=${PRICE_GOVERNMENT}
+      - PRICE_NONPROFIT_PER_USER=${PRICE_NONPROFIT_PER_USER}
+      - NONPROFIT_MIN_USERS=${NONPROFIT_MIN_USERS}
       - CURRENCY=${CURRENCY}
     networks:
       - web
+    depends_on:
+      - redis

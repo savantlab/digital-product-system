@@ -7,10 +7,11 @@ DB_URL = os.environ.get("DB_URL")
 
 # Entitlement mapping per tier (fallback to env overrides)
 DEFAULT_TIER_ENTITLEMENTS = {
-    "individual": ["book", "app"],
+    "individual": ["book", "app", "lab"],
     "academic": ["book", "app", "lab"],
     "corporate": ["book", "app", "lab"],
-    "enterprise": ["book", "app", "lab"],
+    "government": ["book", "app", "lab"],
+    "nonprofit": ["book", "app", "lab"],
 }
 
 BOOK_DOMAIN = os.environ.get("BOOK_DOMAIN", "").lower()
