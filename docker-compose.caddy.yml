@@ -85,5 +85,13 @@ services:
       - store_data:/app
     environment:
       - ADMIN_API_KEY=${ADMIN_API_KEY}
+      - SQUARE_ACCESS_TOKEN=${SQUARE_ACCESS_TOKEN}
+      - SQUARE_LOCATION_ID=${SQUARE_LOCATION_ID}
+      - SQUARE_BASE=${SQUARE_BASE}
+      - STORE_BASE_URL=https://${BASE_DOMAIN}
+      - PRICE_INDIVIDUAL=${PRICE_INDIVIDUAL}
+      - PRICE_ACADEMIC=${PRICE_ACADEMIC}
+      - PRICE_CORPORATE=${PRICE_CORPORATE}
+      - CURRENCY=${CURRENCY}
     networks:
       - web
