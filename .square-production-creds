@@ -1,0 +1,13 @@
+# Square Production Credentials
+# DO NOT COMMIT THIS FILE TO GIT
+
+Application ID: sq0idp-rcYfDyLkAhy642fZ8jpHUA
+Access Token: EAAAl_Wfh_A_K9n1GlAtePkhjc9i-OkxN5qzE2SLrOeUtlRaXwwckjhW-MZu_1z6
+Location ID: LVYCTH4YP5KJ7
+
+# When ready to go live, update .env on droplet:
+# SQUARE_ACCESS_TOKEN=EAAAl_Wfh_A_K9n1GlAtePkhjc9i-OkxN5qzE2SLrOeUtlRaXwwckjhW-MZu_1z6
+# SQUARE_LOCATION_ID=LVYCTH4YP5KJ7
+# SQUARE_BASE=https://connect.squareup.com (remove 'sandbox')
+
+# Then restart: docker compose -f docker-compose.caddy.yml restart store
