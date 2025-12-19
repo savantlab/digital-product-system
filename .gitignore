@@ -40,3 +40,8 @@ book/assets/**
 book/images/**
 book/data/**
 
+
+# Course slide content - keep private
+app/src/App.jsx
+app/src/sections/*.js
+app/src/sections/*.jsx
