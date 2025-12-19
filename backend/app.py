@@ -8,9 +8,11 @@ from flask import Flask, request, jsonify, make_response, redirect, render_templ
 import redis
 from rq import Queue
 from tou_api import tou_bp
+from flog_api import flog_bp
 
 app = Flask(__name__)
 app.register_blueprint(tou_bp)
+app.register_blueprint(flog_bp)
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 r = redis.from_url(REDIS_URL)
