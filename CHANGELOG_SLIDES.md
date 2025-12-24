@@ -26,9 +26,18 @@
 - Emphasizes Peterson never admits symbolism is fabricated (Osiris, yin-yang)
 - Conclusion: Radicalization through pretend play psychology
 
+**Slide: "The Family Business - Peterson Academy and Potential RICO Violations"**
+- Documents Peterson Academy as fraudulent family enterprise
+- Unaccredited "university" charging $499/year, no legitimate degrees
+- Founded by Peterson and daughter Mikhaila Fuller (CEO)
+- Potential RICO violations: pattern of fraud (Harvard → Peterson Academy), family enterprise, mail/wire fraud
+- Counter-terrorism framework: radicalization pipeline monetized as family business
+- "Stop Pretending" thesis: This is fraud, not alternative education
+- Links to The Flog for detailed fraud documentation
+
 ### Course Statistics
-- Implications section: Now 24 slides (was 22)
-- Total course: Now 94 slides (was 92)
+- Implications section: Now 25 slides (was 22)
+- Total course: Now 95 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
