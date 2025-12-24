@@ -6,13 +6,15 @@
 
 **Slide: "Research Finding - Fraud in Maps of Meaning: The Architecture of Belief"**
 - Documents central fraud discovery from Maps of Meaning analysis
-- Peterson claimed to have symbol depicting "the hero who explores the unknown"
-- Reality: No such symbol exists in heraldic tradition - Peterson fabricated/pretended it existed
-- Built entire theoretical framework on invented symbolism
-- Pattern of fraud: Osiris (fabricated), yin-yang (incorrectly derived), hero symbol (invented)
-- Identifies this as academic fraud at Harvard
-- Links to The Flog for complete fabricated heraldry documentation
-- Establishes Maps of Meaning framework as fraud-based
+- Peterson claims "proto-heroic symbol" exists across myths - the hero who explores the unknown
+- Built framework on false Chaos/Order dichotomy
+- "Hero" = hypothetical person (probably man) Peterson radicalizes symbolically in reader's psyche
+- Claims meaning is "intrinsic to mythological perspective" but this really means myth-making = lying
+- Tried to force invented hero to "make sense" with Osiris and Horus - created false myth
+- Pattern: Fabricated Osiris/Horus connection, incorrect yin-yang, Chaos/Order false dichotomy
+- Peterson pretends invented hero narrative is found in actual mythology
+- He's making up myths and calling it scholarship - academic fraud at Harvard
+- Links to The Flog for complete documentation of fabricated symbolism
 
 ---
 
