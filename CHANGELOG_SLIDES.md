@@ -1,5 +1,22 @@
 # Course Module Updates - December 24, 2024
 
+## Flog Article: Maps of Meaning Fraud
+
+**New Article Created**: `/flog/maps-of-meaning-fraud`
+
+Comprehensive documentation of Peterson's academic fraud:
+- Central fraud: Fabricated "proto-heroic symbol" across myths
+- Created Osiris version not in Egyptian mythology, no sources
+- "Mythological perspective" = myth-making = lying
+- False Chaos/Order dichotomy for radicalization
+- Pattern: Fabricate symbolism, claim universality, no sources, use for radicalization
+- Connection to Breivik: 75% overlap, both built on fraud, neither used sources properly
+- Pretend play psychology creates radicalization framework
+
+Slides now link to this article for complete fraud documentation.
+
+---
+
 ## Maps of Meaning Fraud Finding Added
 
 ### New Slide in Methodology Section
@@ -53,10 +70,18 @@
 - "Stop Pretending" thesis: This is fraud, not alternative education
 - Links to The Flog for detailed fraud documentation
 
+**Slide: "Shared Fraud Pattern - Peterson and Breivik: Both Built on Lies"**
+- Documents parallel fraud between Peterson and Breivik
+- Peterson: Created Osiris not in Egyptian mythology, no sources, fabricated proto-heroic symbol, academic fraud
+- Breivik: Copy-paste plagiarism throughout manifesto, didn't use sources properly, stole material
+- Pattern: Both built extremist ideology on fraud and lies
+- 75% conceptual overlap between two fraudulent works
+- Not "misinterpretation" - deliberate frauds promoting Nazi-adjacent ideology
+
 ### Course Statistics
 - Methodology section: Now 17 slides (was 16)
-- Implications section: Now 25 slides (was 22)
-- Total course: Now 96 slides (was 92)
+- Implications section: Now 26 slides (was 22)
+- Total course: Now 97 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
