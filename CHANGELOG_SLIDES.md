@@ -18,6 +18,11 @@
 - Students adopt hero role, feminism becomes dragon, Marx becomes villain
 - Like Stanford guards, students forget it's pretend—acts on imagined war
 - Breivik as extreme example: violent action on Peterson's hero narrative
+- **NEW: Adult pretend play research section added**
+  - Citations: Kapitany, R., Hampejs, T., & Goldstein, T.R. (2022). Pretensive shared reality: From childhood pretense to adult imaginative play. Frontiers in Psychology, 13, 774085.
+  - Shows adults regularly engage in "pretensive shared reality"—shared representations of bounded fictional realities that become psychologically real
+  - Demonstrates pretend play is not limited to childhood
+  - Explains Peterson weaponizes this mechanism through Maps of Meaning
 - Emphasizes Peterson never admits symbolism is fabricated (Osiris, yin-yang)
 - Conclusion: Radicalization through pretend play psychology
 
