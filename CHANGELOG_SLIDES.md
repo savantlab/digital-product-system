@@ -1,5 +1,21 @@
 # Course Module Updates - December 24, 2024
 
+## Maps of Meaning Fraud Finding Added
+
+### New Slide in Methodology Section
+
+**Slide: "Research Finding - Fraud in Maps of Meaning: The Architecture of Belief"**
+- Documents central fraud discovery from Maps of Meaning analysis
+- Peterson claimed to have symbol depicting "the hero who explores the unknown"
+- Reality: No such symbol exists in heraldic tradition - Peterson fabricated/pretended it existed
+- Built entire theoretical framework on invented symbolism
+- Pattern of fraud: Osiris (fabricated), yin-yang (incorrectly derived), hero symbol (invented)
+- Identifies this as academic fraud at Harvard
+- Links to The Flog for complete fabricated heraldry documentation
+- Establishes Maps of Meaning framework as fraud-based
+
+---
+
 ## Stanford Prison Experiment Analysis Added
 
 ### New Slides in Implications Section
@@ -36,8 +52,9 @@
 - Links to The Flog for detailed fraud documentation
 
 ### Course Statistics
+- Methodology section: Now 17 slides (was 16)
 - Implications section: Now 25 slides (was 22)
-- Total course: Now 95 slides (was 92)
+- Total course: Now 96 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
