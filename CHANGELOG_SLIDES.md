@@ -101,7 +101,14 @@ Slides now link to this article for complete fraud documentation.
 - Breivik's framework: Islam/Marxism destroying Europe, defending = righteous crusade, mass murder justified
 - Pattern: Radical morality transforms assumptions into moral imperatives
 - You're not just right—you're righteous; assumptions become unquestionable
-- How pretend play becomes real: moral framework gives permission, assumptions justify action
+- **Male Supremacy Connection**: Both frameworks predicated on male supremacy
+  - Peterson: Order (masculine) = good, Chaos (feminine) = threat
+  - Breivik: Male crusaders defending from feminine chaos
+  - Feminism explicitly enemy in both
+  - "Hero" = masculine figure fighting feminine threat
+  - Defending "order" = defending male power; Fighting "chaos" = fighting women's liberation
+- Radical morality inseparable from male supremacy
+- How pretend play becomes real: moral framework gives permission, assumptions justify action, all built on male supremacy
 
 ### Course Statistics
 - Methodology section: Now 17 slides (was 16)
