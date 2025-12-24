@@ -87,10 +87,17 @@ Slides now link to this article for complete fraud documentation.
 - Not coincidence - shared extremist ideology
 - "When you blame the same people the same way a Nazi terrorist does, that's not misinterpretation"
 
+**Slide: "Defining Radicalization - Pretend Play as Mass Media Strategy"**
+- Establishes definition: Producing mass media predicated on writer's pretend play (ego) fighting imagined war to recruit others
+- Peterson's Culture War: Ego as hero fighting chaos/Marxism, mass media (PragerU/Maps of Meaning), recruitment to fight "dragons"
+- Breivik's War Movement: Ego as crusader, imagined war (Europe vs Islam/Marxism), 1,518 page manifesto, tried to initiate armed resistance
+- Pattern: Both use pretend play psychology to recruit into imagined wars
+- Writer's ego creates hero narrative → mass media distributes → followers adopt role → war becomes psychologically real
+
 ### Course Statistics
 - Methodology section: Now 17 slides (was 16)
-- Implications section: Now 27 slides (was 22)
-- Total course: Now 98 slides (was 92)
+- Implications section: Now 28 slides (was 22)
+- Total course: Now 99 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
