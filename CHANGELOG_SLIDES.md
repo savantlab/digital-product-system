@@ -94,10 +94,19 @@ Slides now link to this article for complete fraud documentation.
 - Pattern: Both use pretend play psychology to recruit into imagined wars
 - Writer's ego creates hero narrative → mass media distributes → followers adopt role → war becomes psychologically real
 
+**Slide: "Radical Morality - How Moral Frameworks Drive Action on Assumptions"**
+- Explains how radical morality creates framework for wanting to act on assumptions
+- Mechanism: Moral certainty → assumptions become facts → action imperative → violence justified
+- Peterson's framework: Marxism/feminism = chaos, defending order = moral, "heroes fight dragons", hostility justified
+- Breivik's framework: Islam/Marxism destroying Europe, defending = righteous crusade, mass murder justified
+- Pattern: Radical morality transforms assumptions into moral imperatives
+- You're not just right—you're righteous; assumptions become unquestionable
+- How pretend play becomes real: moral framework gives permission, assumptions justify action
+
 ### Course Statistics
 - Methodology section: Now 17 slides (was 16)
-- Implications section: Now 28 slides (was 22)
-- Total course: Now 99 slides (was 92)
+- Implications section: Now 29 slides (was 22)
+- Total course: Now 100 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
