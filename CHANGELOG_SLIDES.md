@@ -78,10 +78,19 @@ Slides now link to this article for complete fraud documentation.
 - 75% conceptual overlap between two fraudulent works
 - Not "misinterpretation" - deliberate frauds promoting Nazi-adjacent ideology
 
+**Slide: "Looking for Someone to Blame - Peterson and Breivik: Same Blaming Pattern"**
+- Documents both wrote looking for someone to blame
+- Breivik's manifesto: 1,518 pages blaming Marx, feminists, multiculturalism, cultural Marxism
+- Peterson's PragerU: 726 words blaming Marx, feminists, postmodernism, identity politics  
+- Same targets, same way, same reasons - 75% conceptual overlap
+- Pattern: Both looking for opportunity to blame
+- Not coincidence - shared extremist ideology
+- "When you blame the same people the same way a Nazi terrorist does, that's not misinterpretation"
+
 ### Course Statistics
 - Methodology section: Now 17 slides (was 16)
-- Implications section: Now 26 slides (was 22)
-- Total course: Now 97 slides (was 92)
+- Implications section: Now 27 slides (was 22)
+- Total course: Now 98 slides (was 92)
 
 ### Key Analytical Framework
 The Stanford Prison Experiment demonstrates how pretend play frameworks become psychologically real and dangerous. Peterson's Maps of Meaning operates the same way—creating imagined wars through fabricated symbolism, then people act on it as if it's real. This is the mechanism of radicalization through pretend play.
