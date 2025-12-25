@@ -45,3 +45,4 @@ book/data/**
 app/src/App.jsx
 app/src/sections/*.js
 app/src/sections/*.jsx
+venv/
