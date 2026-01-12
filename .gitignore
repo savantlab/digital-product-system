@@ -42,3 +42,8 @@ book/data/**
 
 .square-production-creds
 DEPLOYMENT_NOTES.md
+
+# Course slide content - keep private
+app/src/App.jsx
+app/src/sections/*.js
+app/src/sections/*.jsx

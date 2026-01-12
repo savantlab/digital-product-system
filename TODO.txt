@@ -1,0 +1,138 @@
+DIGITAL PRODUCT TODO LIST
+=========================
+
+COURSE MODULES (APP)
+--------------------
+[✓] Build 87 slides across 5 sections (Introduction, Methodology, Rhetorical Excerpts, Discourse Analysis, Implications)
+[✓] Add Western chauvinism and coercive modus ponens analysis
+[✓] Add heraldry fraud documentation throughout modules
+[✓] Integrate Flog references where academic fraud is mentioned
+[ ] Review all slide content for accuracy and completeness
+[ ] Add any additional visual aids or charts needed
+
+THE FLOG (FRAUD BLOG)
+---------------------
+[✓] Build Flog page component and routing
+[✓] Create Flog API backend with CRUD endpoints
+[✓] Add database migration for articles table
+[✓] Style with purple theme matching course
+[✓] Add 7 lorem ipsum placeholder articles
+[✓] Create heraldry image sources documentation
+[ ] Write actual Flog articles (priority order):
+    [ ] 1. Fabricated Symbolism: Peterson's Imagined Heraldry (Osiris, yin-yang)
+    [ ] 2. Decoding the Deception: How Academic Fraud Became a Movement
+    [ ] 3. The Pipeline Problem: From Lecture Hall to Radicalization
+    [ ] 4. The Hero Myth Weaponized: Jung, Campbell, and Mass Manipulation
+    [ ] 5. Follow the Money: How Fraud Became a Fortune
+    [ ] 6. The Reputation Destruction Playbook: Peterson's Defense Strategy
+    [ ] 7. Lexical Alchemy: The Art of Academic Word Salad
+[ ] Collect and properly attribute heraldry images for articles
+[ ] Create individual article pages (currently showing list only)
+
+JUPYTER BOOK
+------------
+[ ] Set up Jupyter Book structure
+[ ] Convert course content to book format
+[ ] Add computational analysis notebooks
+[ ] Include interactive visualizations
+[ ] Build and deploy book
+
+LAB ENVIRONMENT
+---------------
+[ ] Set up JupyterLab or similar environment
+[ ] Provide sample datasets (Peterson transcript, Breivik excerpts)
+[ ] Include analysis scripts (TF-IDF, LDA, clustering)
+[ ] Create tutorial notebooks
+[ ] Deploy accessible lab instance
+
+EMAIL LOGIC & AUTHENTICATION
+-----------------------------
+[ ] Design email templates:
+    [ ] Welcome email with course access
+    [ ] Two-factor authentication codes
+    [ ] Password reset (if needed)
+    [ ] Purchase confirmation
+[ ] Implement email sending logic
+[ ] Set up Mailgun account
+[ ] Configure Mailgun API credentials
+[ ] Verify Mailgun domain and DNS records
+[ ] Test email deliverability
+[ ] Implement two-factor auth via email
+[ ] Session management (3-day cookie sessions)
+[ ] Rate limiting for email sends
+
+PAYMENT & CART
+--------------
+[✓] Square payment integration setup
+[✓] Product page with cart functionality
+[✓] Basic checkout flow
+[ ] Complete cart payment processing
+[ ] Square webhook handler - Receive payment notifications
+[ ] License creation worker - Generate licenses in PostgreSQL
+[ ] Post-purchase redirect flow
+[ ] Team/bulk purchase support
+[ ] Academic tier validation (.edu emails)
+[ ] Production Square credentials (currently sandbox)
+
+PRODUCT PAGE ENHANCEMENTS
+--------------------------
+[ ] Details section HTML - Write product details
+[ ] FAQ section HTML - Create frequently asked questions
+[ ] Video embedding support - Add hero video capability
+[ ] Demo video - 60-90 sec explainer
+[ ] Walkthrough video - 2-3 min detailed demo
+[ ] Before/after examples - Show analysis results
+[ ] Social proof - Add testimonials/endorsements if available
+
+INFRASTRUCTURE
+--------------
+[✓] PostgreSQL database setup
+[✓] Flask backend API structure
+[✓] React frontend with Vite
+[✓] TOU (Terms of Use) API and modal
+[✓] Flog API and database tables
+[ ] Production Square credentials - Switch from sandbox
+[ ] Mailgun setup and verification - PRIORITY
+[ ] Email template system
+[ ] Backup strategy - Database backups
+[ ] Monitoring - Error tracking and uptime monitoring
+[ ] SSL/Security audit - Review security configuration
+[ ] CDN for static assets (optional)
+
+LAUNCH PREPARATION
+------------------
+[ ] Content QA - Review all book/notebook content
+[ ] Payment flow testing - End-to-end purchase testing
+[ ] Email deliverability testing - Test all email scenarios
+[ ] Mobile responsiveness - Test on various devices
+[ ] Performance optimization - Load time checks
+[ ] Legal pages - Terms of service, privacy policy, refund policy
+
+MARKETING
+---------
+[ ] Landing page copy refinement
+[ ] SEO optimization - Meta tags, descriptions
+[ ] Analytics setup - Track conversions
+[ ] Launch announcement - Email/social media
+[ ] Demo video production
+[ ] Preview/teaser content
+
+PRIORITY ORDER (UPDATED)
+------------------------
+1. Write Flog articles (especially heraldry fraud article)
+2. Build Jupyter Book from course content
+3. Set up Lab environment with datasets and notebooks
+4. Email logic: Mailgun setup and verification - CRITICAL PATH
+5. Complete cart payment flow (Square webhooks, license creation)
+6. Review and finalize all course module content
+7. Testing and QA (payment flow, email delivery, course access)
+8. Video production (demo, walkthrough)
+9. Launch preparation
+
+CRITICAL PATH ITEMS
+-------------------
+1. Mailgun setup and email verification
+2. Square payment webhook completion
+3. Flog article writing (content is ready to display)
+4. Lab environment setup
+5. Jupyter Book build

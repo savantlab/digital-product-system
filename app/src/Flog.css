@@ -1,0 +1,163 @@
+.flog-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #f5f5f5;
+  padding: 4rem 2rem;
+}
+
+.flog-header {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.flog-header h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.flog-tagline {
+  font-size: 1.5rem;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.flog-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #999;
+}
+
+.articles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 4rem 0;
+}
+
+.no-articles {
+  text-align: center;
+  padding: 4rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.no-articles p:first-child {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.coming-soon-message {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #999;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.article-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.article-card:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+  transform: translateY(-4px);
+}
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.article-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.article-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(102, 126, 234, 0.2);
+  color: #667eea;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.article-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f5f5f5;
+  line-height: 1.4;
+}
+
+.article-excerpt {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #999;
+  margin-bottom: 1.5rem;
+}
+
+.read-more {
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.read-more:hover {
+  color: #764ba2;
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .flog-header h1 {
+    font-size: 3rem;
+  }
+
+  .flog-tagline {
+    font-size: 1.2rem;
+  }
+
+  .flog-description {
+    font-size: 1rem;
+  }
+
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -7,8 +7,14 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify, make_response, redirect, render_template
 import redis
 from rq import Queue
+from tou_api import tou_bp
+from flog_api import flog_bp
+from email_api import email_bp
 
 app = Flask(__name__)
+app.register_blueprint(tou_bp)
+app.register_blueprint(flog_bp)
+app.register_blueprint(email_bp)
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 r = redis.from_url(REDIS_URL)
@@ -48,7 +54,30 @@ def auth_start():
     code = issue_otp(email=email, ttl_min=OTP_TTL_MIN)
     try:
         from email_mailgun import send_mailgun
-        send_mailgun("otp_code", to=email, variables={"first_name": first_name, "code": code, "minutes": OTP_TTL_MIN, "host": host})
+        response = send_mailgun("otp_code", to=email, variables={"first_name": first_name, "code": code, "minutes": OTP_TTL_MIN, "host": host})
+        
+        # Log email with auth code for tracking
+        import psycopg
+        from datetime import datetime, timezone
+        try:
+            with psycopg.connect(os.environ.get("DB_URL")) as conn:
+                with conn.cursor() as cur:
+                    cur.execute("""
+                        INSERT INTO email_logs 
+                        (email, template, auth_code, mailgun_id, status, variables, sent_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        email,
+                        'otp_code',
+                        code,
+                        response.json().get('id') if response.ok else None,
+                        'sent' if response.ok else 'failed',
+                        {"first_name": first_name, "code": code, "minutes": OTP_TTL_MIN, "host": host},
+                        datetime.now(timezone.utc)
+                    ))
+                    conn.commit()
+        except Exception:
+            pass
     except Exception:
         pass
     return cors(jsonify({"ok": True}))
